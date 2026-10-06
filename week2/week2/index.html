@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <title>요청_응답</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>HTTP 요청과 응답</h1>
+        <section>
+            <h2>1. 일반 페이지 요청</h2>
+            <p>
+                브라우저가 이 html 문서를 요청하여 화면에 표시
+            </p>
+            <a href="result.html">결과페이지 열기</a>
+        </section>
+        <section>
+            <h2>2. GET 요청</h2>
+            <form action="result.html" method="get">
+                <label for="keyword">
+                    검색어 :
+                </label>
+                <input id="keyword" name="keyword" type="text" value="POOPS">
+                <button type="submit"> GET 요청 보내기 </button>
+            </form>
+        </section>
+        <section>
+            <h2>3. POST 요청</h2>
+            <form action="result.html" method="post">
+                <label for="userid">
+                    ID :
+                </label>
+                <input id="userid" name="userid" type="text" value="IDENTIFY">
+                <label for="userpw">
+                    PW :
+                </label>
+                <input id="userpw" name="userpw" type="password" value="PASSWORD">
+                <button type="submit"> POST 요청 보내기 </button>
+            </form>
+        </section>
+        <section>
+            <h2>4. 상태코드 404</h2>
+            <a href="non_page.html">존재하지 않는 페이지</a>
+        </section>
+    </body>
+</html>
