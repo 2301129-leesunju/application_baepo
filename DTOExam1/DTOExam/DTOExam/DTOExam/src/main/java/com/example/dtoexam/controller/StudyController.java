@@ -33,7 +33,11 @@ public class StudyController {
     ){ if(bindingResult.hasErrors()){
         return "study-form";
     }
-        studyService.save(studyForm);
+        studyService.save(
+                studyForm.getName(),
+                studyForm.getTopic(),
+                studyForm.getStudyHours()
+        );
         return "redirect:/study";
         //브라우저가 GET 방식으로 /study를 새로 요청
         /*return "study-result";*/

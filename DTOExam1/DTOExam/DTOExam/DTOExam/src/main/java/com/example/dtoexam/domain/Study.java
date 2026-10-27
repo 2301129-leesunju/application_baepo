@@ -18,11 +18,32 @@ public class Study {
     private String name;
     private String topic;
     private Integer studyHours;
-
-    public Study(Long id, String name, String topic, Integer studyHours) {
-        this.id = id;
+    protected Study(){}
+    /*
+    * JPA가 db 조회 결과를 이용하여 Study 객체를 만들 때 사용하는 기본 생성자
+    * JPA Entity에는 매개변수가 없는 public, protected 생성자가 필요
+    *
+    *
+    * */
+    public Study(String name, String topic, Integer studyHours) {
         this.name = name;
         this.topic = topic;
+        this.studyHours = studyHours;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public void setStudyHours(Integer studyHours) {
         this.studyHours = studyHours;
     }
 
