@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 등록 완료</title>
+    <style>
+        .container { width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; text-align: center; }
+        .result-box { background-color: #e9ecef; padding: 15px; border-radius: 4px; text-align: left; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>상품 등록이 완료되었습니다.</h2>
+
+    <div class="result-box">
+        <p><strong>상품명:</strong> <span th:text="${productForm.title}">상품명 자리</span></p>
+        <p><strong>가 격:</strong> <span th:text="${productForm.price}">0</span>원</p>
+    </div>
+
+    <a th:href="@{/products/new}">새로운 상품 등록하기</a>
+</div>
+</body>
+</html>
