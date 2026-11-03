@@ -1,0 +1,21 @@
+2026-10-28 12:04:31.770975+09:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "show [*]* table"; SQL statement:
+show * table [42000-240]
+2026-10-28 12:06:08.687944+09:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SHOW [*]* TABLE"; SQL statement:
+SHOW * TABLE [42000-240]
+2026-10-28 12:06:13.036403+09:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SHOW [*]*"; SQL statement:
+SHOW * [42000-240]
+2026-10-28 12:06:18.907861+09:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SHOW [*]* PRODUCT"; SQL statement:
+SHOW * PRODUCT [42000-240]
+2026-10-28 12:06:24.878478+09:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SHOW [*]* PRODUCT TABLE"; SQL statement:
+SHOW * PRODUCT TABLE [42000-240]
+2026-10-28 12:06:52.662004+09:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SHOW TABLES FROM PUBLIC[*]."; SQL statement:
+SHOW TABLES FROM PUBLIC. [42000-240]
+2026-10-28 12:06:59.814826+09:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SHOW TABLES FROM [*]*"; expected "identifier"; SQL statement:
+SHOW TABLES FROM * [42001-240]
