@@ -76,4 +76,12 @@ public class Product {
     public Boolean getOnSale() {
         return onSale;
     }
+
+    public void update(String title, Integer price, Integer quantity, String category, Boolean onSale){
+        this.title=title;
+        this.price=price;
+        this.category=category;
+        this.quantity=quantity;
+        this.onSale=onSale;
+    }
 }

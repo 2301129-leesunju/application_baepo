@@ -62,6 +62,14 @@ public class Study {
     public Integer getStudyHours() {
         return studyHours;
     }
+
+    public void update(String name,String topic,Integer studyHours){
+        this.name=name;
+        this.topic=topic;
+        this.studyHours=studyHours;
+    }
+
+
 }
 /* class : 설계도 (자동차를 만드는 설계도, 썬루프 문짝)
 객체 (자동차):썬루프,문짝

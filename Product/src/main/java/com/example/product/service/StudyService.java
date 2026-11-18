@@ -30,4 +30,22 @@ public class StudyService {
     public List<Study> findAll(){
         return studyRepository.findAll();
     }
+    public Study findById(Long id){
+        return studyRepository.findById(id)
+                .orElseThrow(
+                        ()-> new IllegalArgumentException(
+                                "해당 스터디 신청을 찾을 수 없어요"
+                        )
+                );
+
+    }
+    public Study update(Long id , String name , String topic , Integer studyHours){
+       Study study = findById(id);
+       study.update(name,topic,studyHours);
+       return studyRepository.save(study);
+    }
+    public void delete(Long id){
+        findById(id);
+        studyRepository.deleteById(id);
+    }
 }

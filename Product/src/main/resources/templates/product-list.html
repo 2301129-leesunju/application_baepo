@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 
@@ -56,6 +57,27 @@
             margin-top: 20px;
             text-align: center;
         }
+
+        .favorite-btn {
+            border: none;
+            background: none;
+            font-size: 24px;
+            color: #aaaaaa;
+            cursor: pointer;
+        }
+
+        .favorite-btn.active {
+            color: #ffc107;
+        }
+
+        .favorite-row {
+            background-color: #fff8dc;
+            font-weight: bold;
+        }
+
+        .favorite-row td {
+            border-color: #f0d878;
+        }
     </style>
 </head>
 
@@ -65,7 +87,7 @@
 
     <h1>상품 목록</h1>
 
-    <a th:href="@{/products/new}" class="new-link">새 상품 등록</a>
+    <a th:href="@{/product/new}" class="new-link">새 상품 등록</a>
 
     <table>
         <thead>
@@ -76,15 +98,19 @@
             <th>수량</th>
             <th>카테고리</th>
             <th>판매 여부</th>
+            <th>즐겨찾기</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
+        <tr th:each="product : ${products}" th:attr="data-id=${product.id}">
+            <td>
+                <a th:href="@{/product/{id}(id=${product.id})}"
+                   th:text="${product.id}"></a>
+            </td>
 
             <td>
-                <a th:href="@{/products/{id}(id=${product.id})}"
+                <a th:href="@{/product/{id}(id=${product.id})}"
                    th:text="${product.title}"></a>
             </td>
 
@@ -95,10 +121,18 @@
             <td th:text="${product.category}"></td>
 
             <td th:text="${product.onSale ? '판매 중' : '판매 안 함'}"></td>
+
+            <td>
+                <button type="button" class="favorite-btn"
+                        th:attr="data-id=${product.id}"
+                        aria-label="즐겨찾기">
+                    ☆
+                </button>
+            </td>
         </tr>
 
         <tr th:if="${#lists.isEmpty(products)}">
-            <td colspan="6" class="empty-message">
+            <td colspan="7" class="empty-message">
                 등록된 상품이 없습니다.
             </td>
         </tr>
@@ -108,6 +142,46 @@
     <a th:href="@{/}" class="home-link">메인 화면으로</a>
 
 </div>
+
+<script>
+    const STORAGE_KEY = "favoriteProducts";
+
+    function getFavorites() {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }
+
+    function updateFavoriteDisplay() {
+        const favorites = getFavorites();
+
+        document.querySelectorAll("tbody tr[data-id]").forEach(row => {
+            const id = row.dataset.id;
+            const button = row.querySelector(".favorite-btn");
+            const isFavorite = favorites.includes(id);
+
+            button.textContent = isFavorite ? "★" : "☆";
+            button.classList.toggle("active", isFavorite);
+            row.classList.toggle("favorite-row", isFavorite);
+        });
+    }
+
+    document.querySelectorAll(".favorite-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            const id = this.dataset.id;
+            let favorites = getFavorites();
+
+            if (favorites.includes(id)) {
+                favorites = favorites.filter(item => item !== id);
+            } else {
+                favorites.push(id);
+            }
+
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+            updateFavoriteDisplay();
+        });
+    });
+
+    updateFavoriteDisplay();
+</script>
 
 </body>
 </html>

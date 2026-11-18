@@ -1,15 +1,13 @@
 package com.example.product.controller;
 
+import com.example.product.domain.Study;
 import com.example.product.service.StudyService;
 import org.springframework.ui.Model;
 import com.example.product.dto.StudyForm;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.naming.Binding;
 
@@ -46,6 +44,40 @@ public class StudyController {
     public String showStudyList(Model model){
         model.addAttribute("studies", studyService.findAll());
         return "study-list";
+    }
+    @GetMapping("/{id}")
+    public String showStudyDetail(@PathVariable Long id, Model model){
+        Study study = studyService.findById(id);
+        model.addAttribute("study",study);
+        return "study-detail";
+    }
+    @GetMapping("/{id}/edit")
+    public String dhowStudyEditForm(@PathVariable Long id,Model model){
+        Study study = studyService.findById(id);
+        StudyForm studyForm = new StudyForm();
+        studyForm.setName(study.getName());
+        studyForm.setTopic(study.getTopic());
+        studyForm.setStudyHours(study.getStudyHours());
+        model.addAttribute("studyId",id);
+        model.addAttribute("studyForm",studyForm);
+        return "study-edit";
+    }
+    @PostMapping("{id}/edit")
+    public String updateStudy(@PathVariable Long id,
+                              @Valid @ModelAttribute("studyForm") StudyForm studyForm,
+                              BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()){
+            model.addAttribute("studyId",id);
+            return "study-edit";
+        }
+        studyService.update(id,studyForm.getName(),studyForm.getTopic(),studyForm.getStudyHours());
+
+        return "redirect:/study/"+id;
+    }
+    @PostMapping("/{id}/delete")
+    public String deleteStudy(@PathVariable Long id){
+        studyService.delete(id);
+        return "redirect:/study";
     }
 }
 /*ModelAttribute 역할
